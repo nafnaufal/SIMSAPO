@@ -4,14 +4,14 @@
 
 body{
     font: 'Segoe UI';
-    background-color: #63af92;
+    background-color: #ffffff;
 }
 
 h1{
-    font-family: 'Koulen', cursive;font-family: 'Koulen', cursive;
+    font-family: 'Segoe UI', cursive;font-family: 'Segoe UI', cursive;
     font-size: 40px;
     text-align: center;
-    color: white;
+    color: #000000;
 }
 
 table{
