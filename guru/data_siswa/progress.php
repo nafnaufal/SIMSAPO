@@ -1,20 +1,17 @@
 <?php
     session_start();
-
+    require_once "../SIMSAPO/db/config.php";
     if($_SESSION["no"] == NULL){
         header("location: ../../login.html", true, 303);
     }
-    $nisn =  $_GET["nisn"];
-    $con = mysqli_connect("localhost","root","","sekolah");
-    
+    $nisn =  $_GET["nisn"];    
     $qsiswa = "SELECT * FROM siswa WHERE nisn = '$nisn'";
-
     $semester = array(1, 2, 3, 4, 5, 6);
     $rata = array();
 
     foreach($semester as $i){
         $qnilai = "SELECT nilai FROM nilai WHERE nisn = '$nisn' AND semester = '$i'";
-        $gqnilai = mysqli_query($con, $qnilai);
+        $gqnilai = mysqli_query(Koneksi::getKoneksi(), $qnilai);
         $hitung = array();
 
         while($row = mysqli_fetch_row($gqnilai)) {
@@ -31,7 +28,7 @@
         }
     }
 
-    $hasilS = mysqli_query($con,$qsiswa);
+    $hasilS = mysqli_query(Koneksi::getKoneksi(),$qsiswa);
     $siswa = mysqli_fetch_array($hasilS);
 
 ?>

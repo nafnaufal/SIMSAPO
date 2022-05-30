@@ -1,4 +1,5 @@
 <?php
+    require_once "../SIMSAPO/db/config.php";
     $id = (int) $_GET["id"];
     $sql = "SELECT * FROM berita WHERE id_berita = $id";
     $exe = mysqli_query(Koneksi::getKoneksi(), $sql);

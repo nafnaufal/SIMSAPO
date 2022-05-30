@@ -1,17 +1,16 @@
 <?php
+    require_once "../SIMSAPO/db/config.php";
     session_start();
-
     if($_SESSION["no"] == NULL){
         header("location: ../login.html", true, 303);
     }
     
     $nip = 20201;
-    $con = mysqli_connect("localhost","root","","sekolah");
     $qmapel = "SELECT * FROM jadwal WHERE kode_mapel IN (SELECT kode FROM mapel WHERE nip = '$nip')";
     
     $jadwal = array();
 
-    $mapel = mysqli_query($con,$qmapel);
+    $mapel = mysqli_query(Koneksi::getKoneksi(),$qmapel);
     while($i = mysqli_fetch_row($mapel)){
         $temp = array($i[1], $i[2], $i[3], $i[4]);
         array_push($jadwal, $temp);
