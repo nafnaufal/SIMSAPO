@@ -1,22 +1,19 @@
 <?php
-
+    require_once "../SIMSAPO/db/config.php";
     session_start();
 
     if($_SESSION["no"] == NULL){
         header("location: ../../login.html", true, 303);
     }
-
     $nisn =  $_GET["nisn"];
-    
-    $con = mysqli_connect("localhost","root","","sekolah");
     $siswa = "SELECT * FROM siswa WHERE nisn = '$nisn'";
 
     $nilai = "SELECT * FROM nilai WHERE nisn = '$nisn' ORDER BY semester";
 
-    $hasilS = mysqli_query($con,$siswa);
+    $hasilS = mysqli_query(Koneksi::getKoneksi(),$siswa);
     $dataS = mysqli_fetch_array($hasilS);
     
-    $hasilN = mysqli_query($con,$nilai);
+    $hasilN = mysqli_query(Koneksi::getKoneksi(),$nilai);
     
 
 ?>

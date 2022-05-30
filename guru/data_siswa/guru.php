@@ -1,15 +1,11 @@
 <?php
-
+    require_once "../SIMSAPO/db/config.php";
     session_start();
-
     if($_SESSION["no"] == NULL){
         header("location: ../../login.html", true, 303);
     }
-
-    $con = mysqli_connect("localhost","root","","sekolah");
     $qget = "SELECT * FROM siswa";
-    $hasil = mysqli_query($con,$qget);
-
+    $hasil = mysqli_query(Koneksi::getKoneksi(),$qget);
 ?>
 
 <!DOCTYPE html>

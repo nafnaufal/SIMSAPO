@@ -1,7 +1,7 @@
 <?php
-  $koneksi = mysqli_connect("localhost", "root", "", "sekolah");
-  $sql = "SELECT * FROM galery ORDER BY (id_foto) DESC LIMIT 9";
-  $exe = mysqli_query($koneksi, $sql);
+  require_once "../SIMSAPO/db/config.php";
+  $sql = "SELECT * FROM galery ORDER BY (id_foto)";
+  $exe = mysqli_query(Koneksi::getKoneksi(), $sql);
 ?>
 
 <!DOCTYPE html>
