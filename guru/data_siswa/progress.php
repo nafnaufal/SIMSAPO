@@ -135,7 +135,7 @@
                 const ctx = document.getElementById('myChart').getContext('2d');
                 
                 const chart = new Chart(ctx, {
-                    type: 'pie',
+                    type: 'line',
                     data: {
                         labels: semester,
                         datasets: [{
