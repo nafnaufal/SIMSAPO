@@ -9,9 +9,18 @@
     if(mysqli_num_rows($query)){
         if(password_verify($pas, $data['password'])){
             session_start();
+            $role = $data["role"];
             $_SESSION["no"] = $_POST['no'];
             $_SESSION["role"] = $data["role"];
-            header("Refresh:0; url=./home.html", true, 303);
+
+            if($role == "guru"){
+                header("Location: ./home.php");
+            }else if($role == "siswa"){
+                header("Location: ./homeSiswa.php");
+            }else{
+                 header("Location: ./homeAdmin.php");
+            }
+            
         }else{
             echo "Password Salah";
             header("Refresh:1; url=./login.html", true, 303);
