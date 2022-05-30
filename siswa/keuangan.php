@@ -1,5 +1,5 @@
 <?php
-require_once "db/config.php";
+require_once "../db/config.php";
     $siswa = "SELECT * FROM siswa WHERE nisn = '0001'";
     $hasilS = mysqli_query(Koneksi::getKoneksi(),$siswa);
     $dataS = mysqli_fetch_array($hasilS);

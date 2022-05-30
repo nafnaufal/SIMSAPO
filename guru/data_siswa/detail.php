@@ -1,5 +1,5 @@
 <?php
-require_once "db/config.php";
+require_once "../../db/config.php";
     session_start();
 
     if($_SESSION["no"] == NULL){
@@ -107,7 +107,7 @@ require_once "db/config.php";
                 $kodeM = $i["kode_mapel"];
                 $mapel = "SELECT * FROM mapel WHERE kode = '$kodeM'";
 
-                $namaM = mysqli_query($con,$mapel);
+                $namaM = mysqli_query(Koneksi::getKoneksi(),$mapel);
                 $dataM = mysqli_fetch_array($namaM);
 
                 echo '<tr>';
