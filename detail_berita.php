@@ -1,8 +1,7 @@
 <?php
     $id = (int) $_GET["id"];
-    $koneksi = mysqli_connect("localhost", "root", "", "sekolah");
     $sql = "SELECT * FROM berita WHERE id_berita = $id";
-    $exe = mysqli_query($koneksi, $sql);
+    $exe = mysqli_query(Koneksi::getKoneksi(), $sql);
 ?>
 
 <!DOCTYPE html>
