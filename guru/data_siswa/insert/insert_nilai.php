@@ -1,14 +1,14 @@
 <?php
     session_start();
-
+    require_once "db/config.php";
     if($_SESSION["no"] == NULL){
         header("location: ../../../login.html", true, 303);
     }
-    $con = mysqli_connect("localhost","root","","sekolah");
+
     $qsiswa = "SELECT * FROM siswa";
     $qmapel = "SELECT * FROM mapel";
-    $siswa = mysqli_query($con,$qsiswa);
-    $mapel = mysqli_query($con,$qmapel);
+    $siswa = mysqli_query(Koneksi::getKoneksi(),$qsiswa);
+    $mapel = mysqli_query(Koneksi::getKoneksi(),$qmapel);
 ?>
 
 <!DOCTYPE html>

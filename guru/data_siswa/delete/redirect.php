@@ -1,14 +1,12 @@
 <?php
     session_start();
-
+    require_once "db/config.php";
     if($_SESSION["no"] == NULL){
         header("location: ../../../login.html", true, 303);
     }
-    $con = mysqli_connect("localhost","root","","sekolah");
-    
     $id = $_POST["id"];
     $qdel = "DELETE FROM nilai WHERE id = $id";
-    mysqli_query($con, $qdel);
+    mysqli_query(Koneksi::getKoneksi(), $qdel);
     ?>
 
 <!DOCTYPE html>

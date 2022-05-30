@@ -1,16 +1,12 @@
 <?php
-
     session_start();
-
+    require_once "db/config.php";
     if($_SESSION["no"] == NULL){
         header("location: ../../../login.html", true, 303);
     }
-
-    $con = mysqli_connect("localhost","root","","sekolah");
     $nisn = $_POST["nisn"];
-
     $qget = "SELECT * FROM nilai where nisn = $nisn";
-    $hasil = mysqli_query($con,$qget);
+    $hasil = mysqli_query(Koneksi::getKoneksi(),$qget);
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +72,7 @@
                                         $kodeM = $i["kode_mapel"];
                                         $mapel = "SELECT * FROM mapel WHERE kode = '$kodeM'";
                         
-                                        $namaM = mysqli_query($con,$mapel);
+                                        $namaM = mysqli_query(Koneksi::getKoneksi(),$mapel);
                                         $dataM = mysqli_fetch_array($namaM);
 
                                         echo '<option value="'.$i["id"].'"> Semester '.$i["semester"].' - '.$dataM["nama"].'</option>';

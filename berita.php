@@ -1,5 +1,5 @@
 <?php
-  require_once "../SIMSAPO/db/config.php";
+  require_once "db/config.php";
   $sql = "SELECT * FROM berita ORDER BY (id_berita) DESC";
   $exe = mysqli_query(Koneksi::getKoneksi(), $sql);
 ?>

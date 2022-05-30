@@ -1,12 +1,9 @@
 <?php
     session_start();
-
+    require_once "db/config.php";
     if($_SESSION["no"] == NULL){
         header("location: ../../../login.html", true, 303);
     }
-
-    $con = mysqli_connect("localhost","root","","sekolah");
-    
     $nisn = $_POST["nisn"];
     $nilai = $_POST["nilai"];
     $sem = $_POST["sem"];
@@ -14,7 +11,7 @@
 
     $qin = "INSERT INTO `nilai`(`nilai`, `semester`, `kode_mapel`, `nisn`) VALUES ('$nilai','$sem','$mapel','$nisn')";
     
-    mysqli_query($con, $qin);
+    mysqli_query(Koneksi::getKoneksi(), $qin);
     ?>
 
 <!DOCTYPE html>
