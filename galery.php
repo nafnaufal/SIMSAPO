@@ -21,7 +21,7 @@
     <tr>
       <?php $i = 0; while ($data = mysqli_fetch_assoc($exe)) {
         $i = $i + 1; ?>
-        <td><a href="./home.html?id= <?php echo $data['id_foto'] ?>">
+        <td><a href="./home.php?id= <?php echo $data['id_foto'] ?>">
           <img src="<?php echo $data['path'] ?>" alt="<?php echo $data['title'] ?>"></a></td>
         <?php if ($i % 3 == 0) { ?>
     </tr>

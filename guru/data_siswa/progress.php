@@ -51,7 +51,7 @@
         <div class="container-fluid" style="min-height: 100vh;">
         <div class="row">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-lg-5" style="width: 280px;">
-                <a href="../../home.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <a href="../../home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <img class="me-3" src="../../assets/logo.png" height="50">
                 <span class="fs-4">Simsapo</span>
@@ -135,7 +135,7 @@
                 const ctx = document.getElementById('myChart').getContext('2d');
                 
                 const chart = new Chart(ctx, {
-                    type: 'pie',
+                    type: 'line',
                     data: {
                         labels: semester,
                         datasets: [{
