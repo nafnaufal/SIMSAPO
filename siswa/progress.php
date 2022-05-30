@@ -1,5 +1,5 @@
 <?php
-    require_once "../db/config.php";
+require_once "db/config.php";
     $nisn =  $_GET["nisn"];
     $qnilai = "SELECT * FROM nilai WHERE nisn = '$nisn' ORDER BY semester";
     

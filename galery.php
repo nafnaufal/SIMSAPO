@@ -1,5 +1,5 @@
 <?php
-  require_once "../db/config.php";
+    require_once "db/config.php";
   $sql = "SELECT * FROM galery ORDER BY (id_foto)";
   $exe = mysqli_query(Koneksi::getKoneksi(), $sql);
 ?>

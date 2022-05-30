@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once "../db/config.php";
+require_once "db/config.php";
 
     if($_SESSION["no"] == NULL){
         header("location: ../login.html", true, 303);

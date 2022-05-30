@@ -1,7 +1,7 @@
 <?php
 class Koneksi{
     private static $USERNAME = "root";
-    private static $PASSWORD = "";
+    private static $PASSWORD = "rian";
     private static $DATABASE = "sekolah";
     private static $HOSTNAME = "localhost";
     private static $kon = NULL;

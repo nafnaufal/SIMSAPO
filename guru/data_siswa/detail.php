@@ -1,5 +1,5 @@
 <?php
-    require_once "../SIMSAPO/db/config.php";
+require_once "db/config.php";
     session_start();
 
     if($_SESSION["no"] == NULL){

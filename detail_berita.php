@@ -1,8 +1,8 @@
 <?php
-    require_once "../SIMSAPO/db/config.php";
-    $id = (int) $_GET["id"];
-    $sql = "SELECT * FROM berita WHERE id_berita = $id";
-    $exe = mysqli_query(Koneksi::getKoneksi(), $sql);
+require_once "db/config.php";
+$id = (int)$_GET["id"];
+$sql = "SELECT * FROM berita WHERE id_berita = $id";
+$exe = mysqli_query(Koneksi::getKoneksi(), $sql);
 ?>
 
 <!DOCTYPE html>
@@ -18,11 +18,11 @@
     </head>
 
     <body>
-        <h3><?php echo $row["sinop"] ?></h3>
-        <img src="<?php echo $row["image"] ?>" alt="">
-        <div class="isi">
-            <p><?php echo $row["isi"] ?></p>
-        </div>
+    <h3><?php echo $row["sinop"] ?></h3>
+    <img src="<?php echo $row["image"] ?>" alt="">
+    <div class="isi">
+        <p><?php echo $row["isi"] ?></p>
+    </div>
     </body>
 <?php } ?>
 
