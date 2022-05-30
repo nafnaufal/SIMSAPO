@@ -1,18 +1,12 @@
 <?php
-require_once "../db/config.php";
-    $siswa = "SELECT * FROM siswa WHERE nisn = '0001'";
-    $hasilS = mysqli_query(Koneksi::getKoneksi(),$siswa);
-    $dataS = mysqli_fetch_array($hasilS);
-
-    $hari = array("Senin", "Selasa", "Rabu", "Kamis", "Jumat");
-    $jam = array("07:30:00", "09:20:00", "11:10:00", "13:30:00");
-    
-    $jadwal = array(
-        array("Semester 2", "09:20:00", "Matematika"),
-        array("Senin", "13:30:00", "Sejarah"),
-        array("Kamis", "09:20:00", "Biologi"),
-        array("Jumat", "11:10:00", "English"),
-    );
+    session_start();
+    require_once "../db/config.php";
+    if($_SESSION["no"] == NULL){
+        header("location: ../../login.html", true, 303);
+    }
+    $nisn = $_SESSION["no"];
+    $qget = "SELECT * FROM keuangan WHERE nisn = '$nisn'";
+    $hasil = mysqli_query(Koneksi::getKoneksi(),$qget);
 ?>
 
 <!DOCTYPE html>
@@ -27,27 +21,78 @@ require_once "../db/config.php";
     </head>
     
     <body>
-        <div class="container text-center">
-            <h1>Keuangan</h1>
+        <div class="container-fluid" style="min-height: 100vh;">
+                <div class="row">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-lg-5" style="width: 280px;">
+            <a href="../home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <img class="me-3" src="../assets/logo.png" height="50">
+            <span class="fs-4">Simsapo</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+            <li>
+                <a href="./progress.php" class="nav-link link-dark">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Progress
+                </a>
+            </li>
+            <li>
+                <a href="./jadwal.php" class="nav-link link-dark" aria-current="page">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                    Jadwal
+                </a>
+            </li>
+            <li>
+                <a href="./keuangan.php" class="nav-link active">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Keuangan
+                </a>
+            </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>mdo</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="../profile.php">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../logout.php">Sign out</a></li>
+            </ul>
+            </div>
         </div>
 
-        <div class="container">
-        <table class = "table table-striped table-bordered mt-5">
-            <tr>
-                <th>NISN</th>
-                <th>Nama</th>
-                <th>Detail</th>
-            </tr>
-            <?php foreach ($hasil as $i) { ?>
-                <tr>
-                    <td> <?= $i["nisn"] ?> </td>
-                    <td> <?= $i["nama"] ?> </td>
-                    <td>
-                
-                    </td>
-                </tr>
-            <?php } ?>
-        </table>
+        <div class="col-lg-7" style="min-height: 100vh;">
 
+        <div class="container text-center">
+        <h4>Data Nilai</h4>
+        </div>
+        <div class="container">
+            <table class = "table table-striped table-bordered mt-5">
+                <tr>
+                    <th>Tanggal Pembayaran</th>
+                    <th>Jumlah Pembayaran</th>
+                    <th>Status Pembayaran</th>
+                </tr>
+                <?php foreach ($hasil as $i) { ?>
+                    <tr>
+                        <td> <?= $i["tanggal_pembayaran"] ?> </td>
+                        <td> <?= $i["jumlah_bayar"] ?> </td>
+                        <td> <?= $i["status_pembayaran"] ?> </td>
+                    </tr>
+                <?php } ?>
+            </table>
+
+            <button class = "btn btn-primary" onclick="location.href='./insert/insert_nilai.php'">
+                Upload bukti Transfer
+            </button>
+        </div>
+        </div>
+        </body>
+        
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     </body>
 </html>

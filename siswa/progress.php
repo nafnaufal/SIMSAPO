@@ -1,47 +1,36 @@
 <?php
-require_once "../db/config.php";
-    $nisn =  $_GET["nisn"];
-    $qnilai = "SELECT * FROM nilai WHERE nisn = '$nisn' ORDER BY semester";
-    
+    session_start();
+    require_once "../db/config.php";
+    if($_SESSION["no"] == NULL){
+        header("location: ../../login.html", true, 303);
+    }
+    $nisn =  $_SESSION["no"];    
     $qsiswa = "SELECT * FROM siswa WHERE nisn = '$nisn'";
+    $semester = array(1, 2, 3, 4, 5, 6);
+    $rata = array();
 
-    $nilai = mysqli_query(Koneksi::getKoneksi(),$qnilai);
+    foreach($semester as $i){
+        $qnilai = "SELECT nilai FROM nilai WHERE nisn = '$nisn' AND semester = '$i'";
+        $gqnilai = mysqli_query(Koneksi::getKoneksi(), $qnilai);
+        $hitung = array();
+
+        while($row = mysqli_fetch_row($gqnilai)) {
+            array_push($hitung, (double) $row[0]);
+        }
+
+        if($hitung != NULL) {
+            $hitung = array_filter($hitung);
+            $average = array_sum($hitung)/count($hitung);
+            
+            array_push($rata, $average);
+        }else{
+            array_push($rata, 0);
+        }
+    }
 
     $hasilS = mysqli_query(Koneksi::getKoneksi(),$qsiswa);
     $siswa = mysqli_fetch_array($hasilS);
 
-    // $jumlahData = mysqli_num_rows($nilai);
-    // $row = mysqli_fetch_array($nilai);
-
-    // foreach($row as $i){
-        // var_dump($row);
-    //     echo "<br>";
-    // }
-    // $rows = [];
-
-    // while ($row = mysqli_fetch_assoc($nilai)) {
-    //     // $rows[] = $row;
-    //     while ($i = mysqli_fetch_assoc($nilai)){
-    //         if($i["semester"] == $row["semester"]){
-    //             echo($i["kode_mapel"]);
-    //             echo($i["nilai"]);
-    //             echo '<br>';
-    //         }
-    //     }
-    // }
-
-    // $semester = array();
-    // $rata = array();
-    // $rank = array();
-
-    // foreach($rows as $i){
-    //     array_push($semester, (int) $i["semester"]);
-    //     array_push($rata, (float) $i["nilai_rata_rata"]);
-    //     array_push($rank, (float) $i["peringkat"]);
-    // }
-    // const semester = [<?php //echo '"'.implode('","', $semester).'"' ?>];
-    // const dataRata = [<?php //echo '"'.implode('","', $rata).'"' ?>];
-    // const dataRank = [<?php //echo '"'.implode('","', $rank).'"' ?>];
 ?>
 
 <!doctype html>
@@ -59,26 +48,51 @@ require_once "../db/config.php";
 
     <body>
 
-        <div class="container mt-5">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>Nama</td>
-                        <td>: <?= $siswa["nama"] ?></td>
-                    </tr>
-                    <tr>
-                        <td>NISN</td>
-                        <td>: <?= $siswa["nisn"] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Kelas</td>
-                        <td>: <?= $siswa["kode_kelas"] ?></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="container-fluid" style="min-height: 100vh;">
+        <div class="row">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-lg-5" style="width: 280px;">
+            <a href="../home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <img class="me-3" src="../assets/logo.png" height="50">
+            <span class="fs-4">Simsapo</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+            <li>
+                <a href="./progress.php" class="nav-link active">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Progress
+                </a>
+            </li>
+            <li>
+                <a href="./jadwal.php" class="nav-link link-dark" aria-current="page">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                    Jadwal
+                </a>
+            </li>
+            <li>
+                <a href="./keuangan.php" class="nav-link link-dark">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Keuangan
+                </a>
+            </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>mdo</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="../profile.php">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../logout.php">Sign out</a></li>
+            </ul>
+            </div>
         </div>
 
-        <div class="container mt-5">
+    <div class="col-lg-7" style="min-height: 100vh;">
+    <div class="container mt-5">
 
             <select onchange="update(this.value)">
                 <option value="rata">Rata-rata</option>
@@ -88,10 +102,12 @@ require_once "../db/config.php";
             <canvas id="myChart" width="200" height="100"></canvas>
             
             <script>
+
+                const semester = [<?php echo '"'.implode('","', $semester).'"' ?>];
+                const dataRata = [<?php echo '"'.implode('","', $rata).'"' ?>];
+
                 const judul1 = "Rata-rata"
                 const judul2 = "Ranking"
-                const semester = [1, 2, 3, 4, 5, 6];
-                const dataRata = [90, 72, 84, 92, 90, 70];
                 const dataRank = [1, 2, 1, 5, 1, 2];
                 const step1 = 5;
                 const step2 = 1;
@@ -150,6 +166,8 @@ require_once "../db/config.php";
             </script>
 
         </div>
+    </div>
+    </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"

@@ -1,14 +1,18 @@
 <?php
     session_start();
-require_once "db/config.php";
+    require_once "../db/config.php";
 
     if($_SESSION["no"] == NULL){
         header("location: ../login.html", true, 303);
     }
     
-    $nip = 20201;
+    $nisn = $_SESSION["no"];
+    $qkelas = "SELECT kode_kelas FROM siswa WHERE nisn = '$nisn'";
+    $gkelas = mysqli_query(Koneksi::getKoneksi(),$qkelas);
+    $kelas = mysqli_fetch_row($gkelas);
 
-    $qmapel = "SELECT * FROM jadwal WHERE kode_mapel IN (SELECT kode FROM mapel WHERE nip = '$nip')";
+    
+    $qmapel = "SELECT * FROM jadwal WHERE kode_kelas = '$kelas[0]'";
     
     $jadwal = array();
 
@@ -39,42 +43,46 @@ require_once "db/config.php";
 
     <div class="container-fluid" style="min-height: 100vh;">
         <div class="row">
-            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-lg-5" style="width: 280px;">
-                <a href="../home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                <img class="me-3" src="../assets/logo.png" height="50">
-                <span class="fs-4">Simsapo</span>
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-lg-5" style="width: 280px;">
+            <a href="../home.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <img class="me-3" src="../assets/logo.png" height="50">
+            <span class="fs-4">Simsapo</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+            <li>
+                <a href="./progress.php" class="nav-link link-dark">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Progress
                 </a>
-                <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
-                <li>
-                    <a href="./data_siswa/guru.php" class="nav-link link-dark">
-                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                        Data nilai
-                    </a>
-                </li>
-                </li>
-                <li>
-                    <a href="./jadwal.php" class="nav-link active" aria-current="page">
+            </li>
+            <li>
+                <a href="./jadwal.php" class="nav-link active" aria-current="page">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                     Jadwal
-                    </a>
-                </li>
-                
-                </ul>
-                <hr>
-                <div class="dropdown">
-                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>mdo</strong>
                 </a>
-                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="../profile.php">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="../logout.php">Sign out</a></li>
-                </ul>
-                </div>
+            </li>
+            <li>
+                <a href="./keuangan.php" class="nav-link link-dark">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Keuangan
+                </a>
+            </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>mdo</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="../profile.php">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../logout.php">Sign out</a></li>
+            </ul>
             </div>
+        </div>
 
         <div class="col-lg-7" style="min-height: 100vh;">
         <div class="container text-center">
@@ -101,7 +109,6 @@ require_once "db/config.php";
                                 $nama = mysqli_fetch_row($nmapel);
 
                                 echo '<td>'.$nama[0].'</td>';
-                                echo '<td>'.$jd[3].'</td>';
                                 $cek = true;
                             }
                         }

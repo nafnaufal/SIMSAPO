@@ -5,7 +5,7 @@
         header("location: ../login.html", true, 303);
     }
     
-    $nip = 20201;
+    $nip = $_SESSION["no"];
     $qmapel = "SELECT * FROM jadwal WHERE kode_mapel IN (SELECT kode FROM mapel WHERE nip = '$nip')";
     
     $jadwal = array();
