@@ -21,6 +21,12 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
             <li>
+                <a href="./siswa/nilai.php" class="nav-link link-dark">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Nilai
+                </a>
+            </li>
+            <li>
                 <a href="./siswa/progress.php" class="nav-link link-dark">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                     Progress
