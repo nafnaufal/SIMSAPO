@@ -1,13 +1,13 @@
 <?php
+    require_once "../db/config.php";
     $nisn =  $_GET["nisn"];
-    $con = mysqli_connect("localhost","root","","sekolah");
     $qnilai = "SELECT * FROM nilai WHERE nisn = '$nisn' ORDER BY semester";
     
     $qsiswa = "SELECT * FROM siswa WHERE nisn = '$nisn'";
 
-    $nilai = mysqli_query($con,$qnilai);
+    $nilai = mysqli_query(Koneksi::getKoneksi(),$qnilai);
 
-    $hasilS = mysqli_query($con,$qsiswa);
+    $hasilS = mysqli_query(Koneksi::getKoneksi(),$qsiswa);
     $siswa = mysqli_fetch_array($hasilS);
 
     // $jumlahData = mysqli_num_rows($nilai);
