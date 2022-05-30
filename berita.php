@@ -1,7 +1,7 @@
 <?php
-  $koneksi = mysqli_connect("localhost", "root", "", "sekolah");
+  require_once "../SIMSAPO/db/config.php";
   $sql = "SELECT * FROM berita ORDER BY (id_berita) DESC";
-  $exe = mysqli_query($koneksi, $sql);
+  $exe = mysqli_query(Koneksi::getKoneksi(), $sql);
 ?>
 
 <!doctype html>
