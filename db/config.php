@@ -13,5 +13,4 @@ class Koneksi{
         Koneksi::$kon = NULL;
     }
 }
-
 ?>
