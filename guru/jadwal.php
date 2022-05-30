@@ -95,7 +95,7 @@
                             if($jd[1] == $j){
                                 
                                 $qnama = "SELECT nama FROM mapel WHERE kode  = '$jd[2]'";
-                                $nmapel = mysqli_query($con,$qnama);
+                                $nmapel = mysqli_query(Koneksi::getKoneksi(),$qnama);
                                 $nama = mysqli_fetch_row($nmapel);
 
                                 echo '<td>'.$nama[0].'</td>';

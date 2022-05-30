@@ -1,5 +1,5 @@
 <?php
-    require_once "../SIMSAPO/db/config.php";
+    require_once "../db/config.php";
     $ni = mysqli_real_escape_string(Koneksi::getKoneksi(),$_POST['no']);
     $pas = mysqli_real_escape_string(Koneksi::getKoneksi(),$_POST['password']);
     $sql = "SELECT * FROM akun WHERE nomor_induk = $ni";
