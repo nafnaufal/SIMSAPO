@@ -18,17 +18,19 @@
                 }
             }
 
-            function role_changed(){
-                var role = document.getElementById("jenis-role").value;
+            function mapel_changed(){
+                var role = document.getElementById("kode-mapel").value;
 
-                if(role == "siswa"){
-                    document.getElementById("tgl-contain").style.display = "block";
-                    document.getElementById("alamat-contain").style.display = "block";
-                    document.getElementById("kelas-contain").style.display = "block";
+                if(role == "other"){
+                    document.getElementById("kode-mapel-other").style.display = "block";
+                    document.getElementById("nama-mapel-other").style.display = "block";
+                    document.getElementById("nip-other").style.display = "block";
+
+                    load_nip();
                 }else{
-                    document.getElementById("tgl-contain").style.display = "none";
-                    document.getElementById("alamat-contain").style.display = "none";
-                    document.getElementById("kelas-contain").style.display = "none";
+                    document.getElementById("kode-mapel-other").style.display = "none";
+                    document.getElementById("nama-mapel-other").style.display = "none";
+                    document.getElementById("nip-other").style.display = "none";
                 }
             }
 
@@ -44,7 +46,32 @@
                 xmlhttp.send();
             }
 
+            function load_mapel(){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200){
+                        document.getElementById("kode-mapel").innerHTML = this.responseText;
+                    };
+                };
+
+                xmlhttp.open("GET", "./script/get-mapel.php", true);
+                xmlhttp.send();
+            }
+
+            function load_nip(){
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200){
+                        document.getElementById("nip-other").innerHTML = this.responseText;
+                    };
+                };
+
+                xmlhttp.open("GET", "./script/get-guru.php", true);
+                xmlhttp.send();
+            }
+
             load_kelas();
+            load_mapel();
         </script>
     </head>
     
@@ -91,41 +118,25 @@
             <div class="col-lg-7" style="min-height: 100vh;">
 
                 <div class="container text-center">
-                    <h4>Tambahkan Akun</h4>
+                    <h4>Tambahkan Berita</h4>
                 </div>
                 <div class="container">
-                    <form action="./script/save-user.php" method="get">
+                    <form action="./script/save-berita.php" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="jenis-role" class="form-label">Role</label>
-                            <select name="jenis-role" id="jenis-role" class="form-select" onchange="role_changed()">
-                                <option value="siswa">Siswa</option>
-                                <option value="guru">Guru</option>
-                            </select>
+                            <label for="title" class="form-label">Judul Berita</label>
+                            <input type="text" class="form-control" id="title" name="title">
                         </div>
                         <div class="mb-3">
-                            <label for="no-induk" class="form-label">No Induk</label>
-                            <input type="text" class="form-control" id="no-induk" name="no-induk">
+                            <label for="sinopsis" class="form-label">Ringkasan</label>
+                            <input type="text" class="form-control" id="sinopsis" name="sinopsis">
                         </div>
                         <div class="mb-3">
-                            <label for="nama" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama">
+                            <label for="isi" class="form-label">Isi Berita</label>
+                            <textarea class="form-control" id="isi" name="isi" rows="10"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                        <div class="mb-3" id="tgl-contain">
-                            <label for="tanggal-lahir" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" id="tanggal-lahir" name="tanggal-lahir">
-                        </div>
-                        <div class="mb-3" id="alamat-contain">
-                            <label for="alamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat">
-                        </div>
-                        <div class="mb-3" id="kelas-contain">
-                            <label for="kode-kelas" class="form-label">Kelas</label>
-                            <select name="kode-kelas" id="kode-kelas" class="form-select" onchange="kelas_changed()"></select>
-                            <input class="form-control mt-2" type="text" name="kelas-other" id="kelas-other" placeholder="Kelas" style="display: none">
+                            <label for="file-upload" class="form-label">File Gambar</label>
+                            <input class="form-control" type="file" id="file-upload" name="file-upload">
                         </div>
                         <button type="submit" class="btn btn-primary" name="submit" id="submit">Submit</button>
                     </form>

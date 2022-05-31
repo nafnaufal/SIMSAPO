@@ -8,6 +8,7 @@ if(isset($_GET["submit"])){
     $role = $_GET['jenis-role'];
     $ni = $_GET['no-induk'];
     $nama = $_GET['nama'];
+    $password = $_GET['password'];
     $tgl_lahir = $_GET['tanggal-lahir'];
     $alamat = $_GET['alamat'];
     $kelas = $_GET['kode-kelas'];
@@ -29,7 +30,7 @@ if(isset($_GET["submit"])){
         }
     }
 
-    if($ni === "" || $nama === ""){
+    if($ni === "" || $nama === "" || $password == ""){
         $success = false;
     }
 
@@ -45,8 +46,11 @@ if(isset($_GET["submit"])){
         }
 
         if($success){
+            $pass_hash = password_hash($password, PASSWORD_DEFAULT);
+
             $result = mysqli_query($conn, "INSERT INTO `siswa`(`nisn`, `nama`, `tanggal_lahir`, `alamat`, `kode_kelas`) VALUES ('$ni','$nama','$tgl_lahir','$alamat','$kelas');");
-    
+            $resultAkun = mysqli_query($conn, "INSERT INTO `akun`(`nomor_induk`, `password`, `role`) VALUES ('$ni','$pass_hash','$role')");
+            
             if($result){
                 echo "<script>window.alert(\"Input Sukses\")</script>";
             }else{
