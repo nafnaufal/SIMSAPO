@@ -118,15 +118,18 @@
             <div class="col-lg-7" style="min-height: 100vh;">
 
                 <div class="container text-center">
-                    <h4>Tambahkan Akun</h4>
+                    <h4>Tambahkan Gambar</h4>
                 </div>
                 <div class="container">
-                    <form action="./script/save-jadwal.php" method="get">
+                    <form action="./script/save-galery.php" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="title" class="form-label">Judul Gambar</label>
                             <input type="text" class="form-control" id="title" name="title">
                         </div>
-
+                        <div class="mb-3">
+                            <label for="file-upload" class="form-label">File Gambar</label>
+                            <input class="form-control" type="file" id="file-upload" name="file-upload">
+                        </div>
                         <button type="submit" class="btn btn-primary" name="submit" id="submit">Submit</button>
                     </form>
                 </div>

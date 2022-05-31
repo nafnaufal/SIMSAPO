@@ -118,7 +118,7 @@
             <div class="col-lg-7" style="min-height: 100vh;">
 
                 <div class="container text-center">
-                    <h4>Tambahkan Akun</h4>
+                    <h4>Tambahkan Jadwal</h4>
                 </div>
                 <div class="container">
                     <form action="./script/save-jadwal.php" method="get">
