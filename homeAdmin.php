@@ -13,7 +13,7 @@
     <div class="container-fluid" style="min-height: 100vh;">
         <div class="row">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-lg-5" style="width: 280px;">
-            <a href="./homeSiswa.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <a href="./homeAdmin.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <img class="me-3" src="./assets/logo.png" height="50">
             <span class="fs-4">Simsapo</span>
@@ -21,27 +21,27 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
             <li>
-                <a href="./siswa/nilai.php" class="nav-link link-dark">
+                <a href="./admin/input-berita.php" class="nav-link link-dark">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                    Nilai
+                    Input Berita
                 </a>
             </li>
             <li>
-                <a href="./siswa/progress.php" class="nav-link link-dark">
+                <a href="./admin/input-galery.php" class="nav-link link-dark">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                    Progress
+                    Input Galery
                 </a>
             </li>
             <li>
-                <a href="./siswa/jadwal.php" class="nav-link link-dark" aria-current="page">
+                <a href="./admin/input-jadwal.php" class="nav-link link-dark" aria-current="page">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                    Jadwal
+                    Input Jadwal
                 </a>
             </li>
             <li>
-                <a href="./siswa/keuangan.php" class="nav-link link-dark">
+                <a href="./admin/input-user.php" class="nav-link link-dark">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                    Keuangan
+                    Input User
                 </a>
             </li>
             </ul>
