@@ -64,6 +64,13 @@
                             <a href="./galery.php" class="btn btn-primary align-self-end mt-auto">Lihat Galeri!</a>
                         </div>
                     </div>
+                    <div class="card w-50 h-50 ms-4 align-self-center">
+                        <div class="card-body w-100 d-flex flex-column">
+                            <h5 class="card-title h2">Profil Sekolah</h5>
+                            <p class="card-text w-75 mt-2">Lihat Profil MTs Negeri 1 Pontianak</p>
+                            <a href="./profileSekolah.html" class="btn btn-primary align-self-end mt-auto">Lihat Profil!</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

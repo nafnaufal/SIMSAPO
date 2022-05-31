@@ -43,7 +43,7 @@ require_once "../db/config.php";
                 <li>
                     <a href="./nilai.php" class="nav-link active" aria-current="page">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                        Data nilai
+                        Nilai
                     </a>
                 </li>
                 <li>
