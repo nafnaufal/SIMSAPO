@@ -110,6 +110,10 @@
                             <label for="nama" class="form-label">Nama</label>
                             <input type="text" class="form-control" id="nama" name="nama">
                         </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
                         <div class="mb-3" id="tgl-contain">
                             <label for="tanggal-lahir" class="form-label">Tanggal Lahir</label>
                             <input type="date" class="form-control" id="tanggal-lahir" name="tanggal-lahir">
